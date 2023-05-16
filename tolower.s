@@ -27,7 +27,7 @@ blt 2f
 cmp r0,#'Z'
 bgt 2f
 @ shift the character down
-@ flip the lowercase bit....
+@ set the lowercase bit....
 @ faster than subtracting and adding (or even just adding the offset)
 orr r0,#0x20
 strb r0,[r1,r2] @ just write one byte so we keep the char array righteous
