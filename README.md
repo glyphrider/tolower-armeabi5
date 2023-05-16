@@ -13,7 +13,7 @@ In general, the code works like this:
 1. Check to see if we read more than zero characters, otherwise jump to the `_exit:` label.
 1. Walk through the buffer, reading one character at a time into r0.
 1. Check to see if the character is out of the range of _interesting_ characters, branching forward to `2:` if so.
-1. Toggle the lowercase bit.
+1. Set the lowercase bit.
 1. Write the single byte back into the buffer (at the appropriate offset).
 1. Increment the offset
 1. Check the current offset against the number of bytes read, and branch backward to `1:` if appropriate.

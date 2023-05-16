@@ -28,7 +28,7 @@ bgt 2f
 @ shift the character down
 @ flip the lowercase bit....
 @ faster than subtracting and adding (or even just adding the offset)
-eor r0,#0x20
+orr r0,#0x20
 strb r0,[r1,r2] @ just write one byte so we keep the char array righteous
 2:
 add r2,r2,#1 @ increment index
