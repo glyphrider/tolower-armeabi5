@@ -8,9 +8,9 @@ is a `Makefile` included to assist with building, so you'd also need
 
 In general, the code works like this:
 
-1. Use the software interrupt with syscall 3 (read) to read _up to_ 16 bytes of data from `stdin`. The data consumed is stored in the buffer (defined as four zeroed out words at the bottom of the file).
-1. Squirrel away the number of bytes read by the syscall.
+1. Use the software interrupt with syscall 3 (read) to read _up to_ 256 bytes of data from `stdin`. The data consumed is stored in the buffer (defined as `.space 256,0` at the bottom of the file).
 1. Check to see if we read more than zero characters, otherwise jump to the `_exit:` label.
+1. Squirrel away the number of bytes read by the syscall.
 1. Walk through the buffer, reading one character at a time into r0.
 1. Check to see if the character is out of the range of _interesting_ characters, branching forward to `2:` if so.
 1. Set the lowercase bit.

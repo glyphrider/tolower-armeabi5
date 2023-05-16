@@ -11,13 +11,14 @@ ldr r1, =buffer
 mov r2, #buflen @ buffer length (one byte)
 swi 0
 
-mov r3,r0  @ remember how many characters we read
-cmp r3, #0 @ if we read zero bytes (we're done)
+cmp r0, #0 @ if we read zero bytes (we're done)
 beq _exit  @ then branch to exit
+mov r3,r0  @ remember how many characters we read
 
 @ walk the buffer and lower any uppercase characters
 ldr r1,=buffer
 mov r2,#0 @ start at index zero
+
 1:
 ldrb r0,[r1,r2] @ just read one byte (because the buffer will be packed with chars)
 @ confirm the character is within range
@@ -30,6 +31,7 @@ bgt 2f
 @ faster than subtracting and adding (or even just adding the offset)
 orr r0,#0x20
 strb r0,[r1,r2] @ just write one byte so we keep the char array righteous
+
 2:
 add r2,r2,#1 @ increment index
 cmp r2,r3 @ check against upper bound (number of characters read)
@@ -51,5 +53,5 @@ swi 0
 
 .data
 
-buffer: .word 0,0,0,0
+buffer: .space 256,0
 buflen = . - buffer
