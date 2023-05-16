@@ -2,7 +2,10 @@ EXE=tolower
 OBJS=tolower.o
 
 $(EXE): $(OBJS)
-	ld -s -o $@ $^
+	ld -o $@ $^
+
+%.o : %.s
+	as -g -o $@ $^
 
 .phony: clean
 
